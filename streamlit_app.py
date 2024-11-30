@@ -1,11 +1,11 @@
 import streamlit as st
-import pandas as pd
 import numpy as np
-from sklearn.ensemblw import RandomForestClassifier
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
 
 st.title('🤖 Machine Learning App')
-#
-st.info('This is app builds machine learning mosel')
+
+st.info('This is app builds a machine learning model!')
 
 with st.expander('Data'):
   st.write('**Raw data**')
@@ -20,10 +20,10 @@ with st.expander('Data'):
   y_raw = df.species
   y_raw
 
-
 with st.expander('Data visualization'):
   st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
 
+# Input features
 with st.sidebar:
   st.header('Input features')
   island = st.selectbox('Island', ('Biscoe', 'Dream', 'Torgersen'))
@@ -32,9 +32,8 @@ with st.sidebar:
   flipper_length_mm = st.slider('Flipper length (mm)', 172.0, 231.0, 201.0)
   body_mass_g = st.slider('Body mass (g)', 2700.0, 6300.0, 4207.0)
   gender = st.selectbox('Gender', ('male', 'female'))
-
-
-# Create a DataFrame for the input features
+  
+  # Create a DataFrame for the input features
   data = {'island': island,
           'bill_length_mm': bill_length_mm,
           'bill_depth_mm': bill_depth_mm,
@@ -49,6 +48,7 @@ with st.expander('Input features'):
   input_df
   st.write('**Combined penguins data**')
   input_penguins
+
 
 # Data preparation
 # Encode X
@@ -88,6 +88,7 @@ df_prediction_proba.columns = ['Adelie', 'Chinstrap', 'Gentoo']
 df_prediction_proba.rename(columns={0: 'Adelie',
                                  1: 'Chinstrap',
                                  2: 'Gentoo'})
+
 # Display predicted species
 st.subheader('Predicted Species')
 st.dataframe(df_prediction_proba,
